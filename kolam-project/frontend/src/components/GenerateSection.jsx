@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react'
-import axios from 'axios'
+import api from '../api'
 
 const PATTERNS = [
   'Flower Kolam',
@@ -24,7 +24,7 @@ export default function GenerateSection() {
     setLoading(true)
     setError('')
     try {
-      const { data } = await axios.post('/api/generate', { pattern, color, size: safeSize })
+      const { data } = await api.post('/api/generate', { pattern, color, size: safeSize })
       setImage(data.image)
     } catch (err) {
       setError(err?.response?.data?.detail || 'Generation failed. Start the backend and try again.')

@@ -1,5 +1,5 @@
 ﻿import { useEffect, useRef, useState } from 'react'
-import axios from 'axios'
+import api from '../api'
 
 export default function UploadSection({ onResult }) {
   const fileRef = useRef(null)
@@ -49,7 +49,7 @@ export default function UploadSection({ onResult }) {
     const form = new FormData()
     form.append('file', selectedFile.current)
     try {
-      const { data } = await axios.post('/api/analyze', form)
+      const { data } = await api.post('/api/analyze', form)
       onResult(data)
     } catch (err) {
       setError(err?.response?.data?.detail || 'Analysis failed. Start the backend and try again.')

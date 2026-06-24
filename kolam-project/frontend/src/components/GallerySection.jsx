@@ -1,5 +1,5 @@
 ﻿import { useEffect, useState } from 'react'
-import axios from 'axios'
+import api from '../api'
 
 export default function GallerySection() {
   const [kolams, setKolams] = useState({})
@@ -14,7 +14,7 @@ export default function GallerySection() {
     setLoading(true)
     setError('')
     try {
-      const { data } = await axios.get('/api/gallery')
+      const { data } = await api.get('/api/gallery')
       setKolams(data.kolams)
     } catch {
       setError('Could not load the gallery. Start the backend and try again.')
